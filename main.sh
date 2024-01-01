@@ -13,16 +13,17 @@ read y
 DATE=$x
 
 while [ $DATE -le $y ]
-
 do
-	echo 'a' >> junk
+    for i in {1..10}
+    do
+        echo 'a' >> junk
 
-	git add .
+        git add .
 
-	msg='commit'${DATE}
+        msg='commit'${DATE}'-'${i}
 
-	git commit -m $msg --date="$(date -R -d ${DATE})"
-   	
-   	DATE=$(date +%Y%m%d -d "$DATE + 1 day")
+        git commit -m "$msg" --date="$(date -R -d ${DATE})"
+    done
 
+    DATE=$(date +%Y%m%d -d "$DATE + 1 day")
 done
